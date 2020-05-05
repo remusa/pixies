@@ -15,5 +15,17 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
 
+  backend:
+    build: .
+    environment:
+      - PORT=80
+      - SECRET_KEY=hushush
+      - DATABASE_URL=postgresql://pixies:pixies@db:5432/pixies
+      - ALLOWED_HOSTS=*
+    ports:
+      - 9090:80
+    depends_on:
+      - db
+
 volumes:
   data:
