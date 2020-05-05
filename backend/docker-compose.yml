@@ -21,6 +21,7 @@ services:
       - SECRET_KEY=hushush
       - DATABASE_URL=postgresql://pixies:pixies@db:5432/pixies
       - ALLOWED_HOSTS=*
+      - CORS_ORIGIN_WHITELIST=http://localhost:8080,http://localhost:9091
     ports:
       - 9090:80
     depends_on:
