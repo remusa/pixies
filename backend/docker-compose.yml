@@ -5,9 +5,11 @@ services:
     image: postgres:12-alpine
     container_name: db
     environment:
+      - POSTGRES_DB=pixies
+      - POSTGRES_NAME=pixies
       - POSTGRES_USER=pixies
       - POSTGRES_PASSWORD=pixies
-      - POSTGRES_DB=pixies
+      - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - 5432:5432
     volumes:
