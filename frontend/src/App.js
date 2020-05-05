@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Carousel } from 'react-bootstrap'
+import axios from 'axios'
 
 const App = () => {
-  const items = [
+  const initialItems = [
     {
       url:
         'https://photos.smugmug.com/Animals/Birds/Warblers/Yellow-Warbler-2013/i-Tr5rQBN/0/f058a66f/X5/191130_Camino%20de%20grava%20entre%20el%20Corchito%20y%20Estero%20de%20Chicxulub_079-X5.jpg',
@@ -23,12 +24,27 @@ const App = () => {
     },
   ]
 
+  const [items, setItems] = useState(initialItems)
+
+  useEffect(() => {
+    const url = window.settings.backendUrl
+
+    axios
+      .get(url)
+      .then(response => {
+        setItems(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
+
   return (
     <div className='container'>
       <div className='row'>
         <Carousel>
-          {items.map(item => (
-            <Carousel.Item>
+          {initialItems.map(item => (
+            <Carousel.Item key={item.details}>
               <img className='d-block w-100' src={item.url} alt='' />
 
               <Carousel.Caption>
