@@ -9,7 +9,6 @@ services:
       - POSTGRES_NAME=pixies
       - POSTGRES_USER=pixies
       - POSTGRES_PASSWORD=pixies
-      - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - 5432:5432
     volumes:
@@ -26,6 +25,16 @@ services:
       - 9090:80
     depends_on:
       - db
+
+  frontend:
+    build:
+      context: ../frontend
+    ports:
+      - 9091:80
+    environment:
+      - PORT=80
+    depends_on:
+      - backend
 
 volumes:
   data:
